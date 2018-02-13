@@ -11,6 +11,7 @@ import java.util.LinkedList;
 
 public class PowerPlantDeck extends LinkedList<PowerPlantCard>{
 	
+	//creates a linked list of cards
 	public PowerPlantDeck() {
 		add(new PowerPlantCard(11,4,1,2));
 		add(new PowerPlantCard(12,2,2,2));
@@ -45,12 +46,16 @@ public class PowerPlantDeck extends LinkedList<PowerPlantCard>{
 		add(new PowerPlantCard(44,5,0,5));
 		add(new PowerPlantCard(46,2,3,7));
 		add(new PowerPlantCard(50,5,0,6));
+		
+		//Shuffles deck
 		for(int i = 0; i < size(); i++) {
 			int r = (int)(Math.random() * 33);
 			PowerPlantCard temp = get(r);
 			set(r, get(i));
 			set(i, temp);
 		}
+		
+		//puts first clean energy card on top
 		add(new PowerPlantCard(13,5,0,1));
 	}
 }

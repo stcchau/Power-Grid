@@ -12,10 +12,20 @@ public class ResourceMarket {
 	private static int numPlayers;
 	private static Player[] playerList;
 	public static int[] marketStock = {24,18,6,2};
-	private final static int[] cogPrice = {8,7,6,5,4,3,2,1};
+	
+	//max stock of coal, oil, and garbage
 	private final static int cogMaxStock = 24;
+	
+	//max stock of uranium
 	private final static int uMaxStock = 12;
+	
+	//price of coal, oil, and garbage depending on stock
+	private final static int[] cogPrice = {8,7,6,5,4,3,2,1};
+	
+	//price of uranium depending on stock
 	private final static int[] uPrice = {16,14,12,10,8,7,6,5,4,3,2,1};
+	
+	//3d array of replenishing values that vary depending on # of players and current step #
 	private final static int[][][] coguReplen = {
 			{{3,4,3},{4,5,3},{5,6,4},{5,7,5},{7,9,6}}, 
 			{{2,2,4},{2,3,4},{3,4,5},{4,5,6},{5,6,7}}, 
@@ -27,7 +37,8 @@ public class ResourceMarket {
 		this.numPlayers = playerList.length;
 	}
 	
-	public static void replenish(int step) { //replenishes resources depending on # of players, step
+	//replenishes resources depending on # of players and current step #
+	public static void replenish(int step) {
 		step -= 1;
 		int[] playercogu = {0,0,0,0};
 		for(Player player : playerList) {
@@ -46,7 +57,8 @@ public class ResourceMarket {
 		}
 	}
 	
-	public static int rCost(int rType, int rAmount) { //calculates resource cost recursively
+	//decreases resource stock and uses recursion to calculate resource cost
+	public static int rCost(int rType, int rAmount) {
 		if(rAmount > 0) {
 			marketStock[rType] -= 1;
 			rAmount -= 1;

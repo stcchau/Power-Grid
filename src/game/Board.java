@@ -9,6 +9,7 @@ package game;
  */
 public class Board {
 	
+	//declares cities
 	public static City miami = new City(),
 			tampa = new City(),
 			jacksonville = new City(),
@@ -52,6 +53,7 @@ public class Board {
 			losAngeles = new City(),
 			sanDiego = new City();
 	
+	//declares arrays of cities connections for each city
 	private static City[] miamiC = {tampa},
 			tampaC = {miami, jacksonville},
 			jacksonvilleC = {tampa, newOrleans, birmingham, savannah},
@@ -95,6 +97,7 @@ public class Board {
 			losAngelesC = {sanFrancisco, lasVegas, sanDiego},
 			sanDiegoC = {losAngeles, lasVegas, phoenix};
 	
+	//declares arrays of toll prices for each city
 	private static int[] miamiT = {4},
 			tampaT = {4, 4},
 			jacksonvilleT = {4, 16, 9, 0},
@@ -138,6 +141,7 @@ public class Board {
 			losAngelesT = {9, 9, 3},
 			sanDiegoT = {3, 9, 14};
 	
+	//connects all cities together
 	public Board() {
 		miami.connectCities(miamiC, miamiT);
 		tampa.connectCities(tampaC, tampaT);
@@ -183,7 +187,8 @@ public class Board {
 		sanDiego.connectCities(sanDiegoC, sanDiegoT);
 	}
 	
-	public static int cityCost(City oldCity, City newCity) { //calculates city and toll cost
+	//calculates city and toll cost
+	public static int cityCost(City oldCity, City newCity) {
 		int price = 0;
 		price += oldCity.getToll(newCity);
 		if(!newCity.isOwned(1)) {

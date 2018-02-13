@@ -13,6 +13,7 @@ public class PowerPlantMarket extends ArrayList<PowerPlantCard> {
 	
 	private PowerPlantDeck deck = new PowerPlantDeck();
 	
+	//initial power plant card market
 	public PowerPlantMarket() {
 			add(new PowerPlantCard(3,1,2,1));
 			add(new PowerPlantCard(4,0,2,1));
@@ -23,8 +24,9 @@ public class PowerPlantMarket extends ArrayList<PowerPlantCard> {
 			add(new PowerPlantCard(9,1,1,1));
 			add(new PowerPlantCard(10,0,2,2));
 	}
-
-	public void draw() { //draws top card of deck***NOT DONE***
+	
+	//draws top card of deck ***NOT DONE***
+	public void draw() {
 		add(deck.removeLast());
 	}
 }

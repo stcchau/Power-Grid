@@ -11,12 +11,23 @@ import java.util.ArrayList;
  */
 public class Player {
 	
+	//player's name
 	public String name;
-	public PowerPlantCard[] cards = new PowerPlantCard[3]; //max # of cards player can possess
-	private ArrayList<City> network = new ArrayList<City>(); //player's network of connected houses
-	private int electros = 50; //player's currency
-	private int[] coguMax = {0,0,0,0,0}; //player's max capacity of coal oil garbage uranium hybrid
-	private int[] playerResources = {0,0,0,0}; //player's current resources
+	
+	//array of cards that player currently possesses
+	public PowerPlantCard[] cards = new PowerPlantCard[3];
+	
+	//player's network of connected houses
+	private ArrayList<City> network = new ArrayList<City>();
+	
+	//player's currency
+	private int electros = 50;
+	
+	//player's max capacity of coal, oil, garbage, uranium, and hybrid
+	private int[] coguMax = {0,0,0,0,0};
+	
+	//player's current amount of coal, oil, garbage, and uranium
+	private int[] playerResources = {0,0,0,0};
 	
 	public Player(String name) {
 		this.name = name;
@@ -34,7 +45,8 @@ public class Player {
 		return playerResources[i];
 	}
 	
-	public void rBuy(int rType, int rAmount) { //buys resources
+	//decreases player's electros and increases player resources
+	public void rBuy(int rType, int rAmount) {
 		electros -= ResourceMarket.rCost(rType, rAmount);
 		playerResources[rType] += rAmount;
 	}
