@@ -9,7 +9,7 @@ package game;
  */
 public class ResourceMarket {
 	
-	private static int numPlayers;
+	private final int NUM_PLAYERS;
 	private static Player[] playerList;
 	public static int[] marketStock = {24,18,6,2};
 	
@@ -34,11 +34,11 @@ public class ResourceMarket {
 	
 	public ResourceMarket(Player[] playerList) {
 		this.playerList = playerList;
-		this.numPlayers = playerList.length;
+		NUM_PLAYERS = playerList.length;
 	}
 	
 	//replenishes resources depending on # of players and current step #
-	public static void replenish(int step) {
+	public void replenish(int step) {
 		step -= 1;
 		int[] playercogu = {0,0,0,0};
 		for(Player player : playerList) {
@@ -48,25 +48,37 @@ public class ResourceMarket {
 			playercogu[3] += player.getPlayerResources(3);
 		}
 		for(int i = 0; i < 4; i++) {
-			if(i == 3 && marketStock[i] + playercogu[i] + coguReplen[i][numPlayers][step] > uMaxStock)
+			if(i == 3 && marketStock[i] + playercogu[i] + coguReplen[i][NUM_PLAYERS][step] > uMaxStock)
 				marketStock[i] += uMaxStock - marketStock[i] + playercogu[i];
-			if(marketStock[i] + playercogu[i] + coguReplen[i][numPlayers][step] > cogMaxStock)
+			if(i != 3 && marketStock[i] + playercogu[i] + coguReplen[i][NUM_PLAYERS][step] > cogMaxStock)
 				marketStock[i] += cogMaxStock - marketStock[i] + playercogu[i];
 			else
-				marketStock[i] += coguReplen[i][numPlayers][step];
+				marketStock[i] += coguReplen[i][NUM_PLAYERS][step];
 		}
 	}
 	
 	//decreases resource stock and uses recursion to calculate resource cost
-	public static int rCost(int rType, int rAmount) {
-		if(rAmount > 0) {
-			marketStock[rType] -= 1;
+	public static int getRCost(int rType, int rAmount) {
+		int cost = 0;
+		int temp = marketStock[rType];
+		while(rAmount > 0) {
+			temp -= 1;
 			rAmount -= 1;
 			if(rType == 3)
-				return uPrice[marketStock[rType]] + rCost(rType, rAmount);
+				cost += uPrice[temp];
 			else
-				return cogPrice[marketStock[rType] / 3] + rCost(rType, rAmount);
+				cost += cogPrice[temp / 3];
 		}
-		return 0;
+		return cost;
+	}
+	
+	//add resources to a resource stock
+	public static void addResources(int rType, int rAmount) {
+		marketStock[rType] += rAmount;
+	}
+	
+	//displays market stock info
+	public void displayInfo() {
+		System.out.printf("Coal: %d\tOil: %d\t\tGarbage: %d\tUranium: %d\n", marketStock[0], marketStock[1], marketStock[2], marketStock[3]);
 	}
 }

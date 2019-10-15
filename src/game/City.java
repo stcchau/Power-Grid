@@ -11,62 +11,90 @@ import java.util.ArrayList;
  */
 public class City {
 	
-	private final int step1price = 10;
-	private final int step2price = 15;
-	private final int step3price = 20;
+	public final String CITY_NAME;
 	
-	private boolean step1owned = false;
-	private boolean step2owned = false;
-	private boolean step3owned = false;
+	private final int STEP_1_PRICE = 10;
+	private final int STEP_2_PRICE = 15;
+	private final int STEP_3_PRICE = 20;
 	
-	private ArrayList<City> connections = new ArrayList<City>();
-	private ArrayList<Integer> tolls = new ArrayList<Integer>();
+	private boolean step1vacant = true;
+	private boolean step2vacant = true;
+	private boolean step3vacant = true;
 	
-	public void connectCities(City[] c, int[] t) {
-		for(int i = 0; i < c.length; i++) {
-			connections.add(c[i]);
-			tolls.add(t[i]);
-		}
+	private City[] connections;
+	private int[] tolls;
+	
+	public City(String name) {
+		CITY_NAME = name;
 	}
 	
-	public int getToll(City c) {
-		int toll = tolls.get(connections.indexOf(c));
+	public void connectCities(City[] c, int[] t) {
+		connections = c;
+		tolls = t;
+	}
+	
+	public City[] getConnections() {
+		return connections;
+	}
+	
+	public int getTollTo(City c) {
+		int toll = 0;
+		for(int i = 0; i < tolls.length; i++) {
+			if(connections[i] == c) {
+				toll = tolls[i];
+			}
+		}
 		return toll;
 	}
 	
-	public boolean isOwned(int num) {
+	public boolean isVacant(int num) {
 		switch(num) {
 			case 1:
-				return step1owned;
+				return step1vacant;
 			case 2:
-				return step2owned;
+				return step2vacant;
 			default:
-				return step3owned;
+				return step3vacant;
 		}
 	}
 	
 	public void setToOwned(int num) {
 		switch(num) {
 			case 1:
-				step1owned = true;
+				step1vacant = false;
 				break;
 			case 2:
-				step2owned = true;
+				step2vacant = false;
 				break;
 			case 3:
-				step3owned = true;
+				step3vacant = false;
 				break;
+		}
+	}
+	
+	public boolean isOwned(int step) {
+		switch(step) {
+			case 1:
+				return step1vacant;
+			case 2:
+				return step2vacant;
+			default:
+				return step3vacant;
 		}
 	}
 	
 	public int getPrice(int num) {
 		switch(num) {
 			case 1:
-				return step1price;
+				return STEP_1_PRICE;
 			case 2:
-				return step2price;
+				return STEP_2_PRICE;
 			default:
-				return step3price;
+				return STEP_3_PRICE;
 		}
+	}
+	
+	public void displayInfo() {
+		System.out.printf("City: %s\nStep 1 Vacancy: %s\nStep 2 Vacancy: %s\nStep 3 Vacancy: %s", CITY_NAME, step1vacant, step2vacant, step3vacant);
 	}
 }

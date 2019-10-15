@@ -36,4 +36,24 @@ public class PowerPlantCard {
 	public int getPower() {
 		return power;
 	}
+	
+	//displays card info
+	public void displayInfo() {
+		String type;
+		switch(cardType) {
+			case 0:
+				type = "Coal";
+			case 1:
+				type = "Oil";
+			case 2:
+				type = "Garbage";
+			case 3:
+				type = "Uranium";
+			case 4:
+				type = "Hybrid";
+			default:
+				type = "Clean";
+		}
+		System.out.printf("Card Price: %s\nCard type: %s\nResource Usage: %d\nPower: %d\n", minPrice, type, rUsage, power);
+	}
 }

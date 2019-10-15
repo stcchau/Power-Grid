@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class PowerPlantMarket extends ArrayList<PowerPlantCard> {
 	
-	private PowerPlantDeck deck = new PowerPlantDeck();
+	private static PowerPlantDeck deck = new PowerPlantDeck();
 	
 	//initial power plant card market
 	public PowerPlantMarket() {
@@ -28,5 +28,20 @@ public class PowerPlantMarket extends ArrayList<PowerPlantCard> {
 	//draws top card of deck ***NOT DONE***
 	public void draw() {
 		add(deck.removeLast());
+		for(int i = 0; i < this.size(); i++) {
+			for(int j = 0; j < this.size(); j++){
+				if(this.get(j).getMinPrice() > this.get(j).getMinPrice()) {
+					PowerPlantCard temp = this.get(i);
+					this.set(i, this.get(j));
+					this.set(j, temp);
+				}
+			}
+		}
+	}
+	
+	public void displayInfo() {
+		for(int i = 1; i <= this.size(); i++) {
+			System.out.println("Card Price " + i + ": " + this.get(i - 1).getMinPrice());
+		}
 	}
 }

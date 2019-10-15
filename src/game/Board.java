@@ -10,48 +10,48 @@ package game;
 public class Board {
 	
 	//declares cities
-	public static City miami = new City(),
-			tampa = new City(),
-			jacksonville = new City(),
-			savannah = new City(),
-			raleigh = new City(),
-			norfolk = new City(),
-			washington = new City(),
-			philadelphia = new City(),
-			newYork = new City(),
-			boston = new City(),
-			buffalo = new City(),
-			pittsburgh = new City(),
-			detroit = new City(),
-			cincinnati = new City(),
-			knoxville = new City(),
-			atlanta = new City(),
-			birmingham = new City(),
-			newOrleans = new City(),
-			memphis = new City(),
-			stLouis = new City(),
-			chicago = new City(),
-			duluth = new City(),
-			minneapolis = new City(),
-			omaha = new City(),
-			kansasCity = new City(),
-			oklahomaCity = new City(),
-			dallas = new City(),
-			houston = new City(),
-			fargo = new City(),
-			billings = new City(),
-			cheyenne = new City(),
-			denver = new City(),
-			santaFe = new City(),
-			phoenix = new City(),
-			lasVegas = new City(),
-			saltLakeCity = new City(),
-			boise = new City(),
-			seattle = new City(),
-			portland = new City(),
-			sanFrancisco = new City(),
-			losAngeles = new City(),
-			sanDiego = new City();
+	public static City miami = new City("Miami"),
+			tampa = new City("Tampa"),
+			jacksonville = new City("Jacksonville"),
+			savannah = new City("Savannah"),
+			raleigh = new City("Raleigh"),
+			norfolk = new City("Norfolk"),
+			washington = new City("Washington"),
+			philadelphia = new City("Philadelphia"),
+			newYork = new City("New York"),
+			boston = new City("Boston"),
+			buffalo = new City("Buffalo"),
+			pittsburgh = new City("Pittsburgh"),
+			detroit = new City("Detroit"),
+			cincinnati = new City("Cincinnati"),
+			knoxville = new City("Knoxville"),
+			atlanta = new City("Atlanta"),
+			birmingham = new City("Birmingham"),
+			newOrleans = new City("New Orleans"),
+			memphis = new City("Memphis"),
+			stLouis = new City("St Louis"),
+			chicago = new City("Chicago"),
+			duluth = new City("Duluth"),
+			minneapolis = new City("Minneapolis"),
+			omaha = new City("Omaha"),
+			kansasCity = new City("Kansas City"),
+			oklahomaCity = new City("Oklahoma City"),
+			dallas = new City("Dallas"),
+			houston = new City("Houston"),
+			fargo = new City("Fargo"),
+			billings = new City("Billings"),
+			cheyenne = new City("Cheyenne"),
+			denver = new City("Denver"),
+			santaFe = new City("Santa Fe"),
+			phoenix = new City("Phoenix"),
+			lasVegas = new City("Las Vegas"),
+			saltLakeCity = new City("Salt Lake City"),
+			boise = new City("Boise"),
+			seattle = new City("Seattle"),
+			portland = new City("Portland"),
+			sanFrancisco = new City("San Francisco"),
+			losAngeles = new City("Los Angeles"),
+			sanDiego = new City("San Diego");
 	
 	//declares arrays of cities connections for each city
 	private static City[] miamiC = {tampa},
@@ -188,18 +188,18 @@ public class Board {
 	}
 	
 	//calculates city and toll cost
-	public static int cityCost(City oldCity, City newCity) {
+	public static int getCityCost(City oldCity, City newCity) {
 		int price = 0;
-		price += oldCity.getToll(newCity);
-		if(!newCity.isOwned(1)) {
+		price += oldCity.getTollTo(newCity);
+		if(!newCity.isVacant(1)) {
 			newCity.setToOwned(1);
 			price += newCity.getPrice(1);
 		}
-		else if(!newCity.isOwned(2)) {
+		else if(!newCity.isVacant(2)) {
 			newCity.setToOwned(2);
 			price += newCity.getPrice(2);
 		}
-		else if(!newCity.isOwned(3)) {
+		else if(!newCity.isVacant(3)) {
 			newCity.setToOwned(3);
 			price += newCity.getPrice(3);
 		}
